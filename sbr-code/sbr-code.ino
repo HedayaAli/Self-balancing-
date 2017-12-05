@@ -26,26 +26,35 @@ VectorFloat gravity; // [x, y, z] gravity vector
 float ypr[3]; // [yaw, pitch, roll] yaw/pitch/roll container and gravity vector
 
 //PID
-double originalSetpoint = 178;
+double originalSetpoint = 182;
 double setpoint = originalSetpoint;
-double movingAngleOffset = 0.1;
+double movingAngleOffset = 0.15;
 double input, output;
 
 //adjust these values to fit your own design
-double Kp = 60;   
-double Kd = 1.4;
-double Ki = 50;
+double Kp = 55; //60 //32  
+double Kd = 1.4; //1.4
+double Ki = 32; //50 //60
 PID pid(&input, &output, &setpoint, Kp, Ki, Kd, DIRECT);
 
 double motorSpeedFactorLeft = 0.6;
 double motorSpeedFactorRight = 0.6;
 //MOTOR CONTROLLER
-int ENA = 53;
+
+int ENA = 44;
 int IN1 = 51;
 int IN2 = 52;
 int IN3 = 49;
 int IN4 = 48;
-int ENB = 50;
+int ENB = 46;
+
+//int ENA = 3;
+//int IN1 = 4;
+//int IN2 = 5;
+//int IN3 = 8;
+//int IN4 = 9;
+//int ENB = 10;
+
 LMotorController motorController(ENA, IN1, IN2, ENB, IN3, IN4, motorSpeedFactorLeft, motorSpeedFactorRight);
 
 volatile bool mpuInterrupt = false; // indicates whether MPU interrupt pin has gone high
@@ -81,7 +90,9 @@ void setup()
  mpu.setDMPEnabled(true);
 
  // enable Arduino interrupt detection
+// attachInterrupt(0, dmpDataReady, RISING);
  attachInterrupt(0, dmpDataReady, RISING);
+ 
  mpuIntStatus = mpu.getIntStatus();
 
  // set our DMP Ready flag so the main loop() function knows it's okay to use it
