@@ -32,12 +32,12 @@ double movingAngleOffset = 0.10;
 double input, output;
 
 //adjust these values to fit your own design
-double Kp = 50; //60 //32  
+double Kp = 60; //60 //32  
 double Kd = 1.4; //1.4
-double Ki = 100; //50 //60
+double Ki = 80; //50 //60
 PID pid(&input, &output, &setpoint, Kp, Ki, Kd, DIRECT);
 
-double motorSpeedFactorLeft = 0.5;
+double motorSpeedFactorLeft = 0.5 ;
 double motorSpeedFactorRight = 0.52;
 //MOTOR CONTROLLER
 
